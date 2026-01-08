@@ -37,12 +37,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form submission handler (Demo)
+    // Form submission handler
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Thank you for your message! This is a demo form.');
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const subject = `Contact from Portfolio: ${name}`;
+            const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+            // Open email client
+            window.location.href = `mailto:vimalthasmiga1112@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
             contactForm.reset();
         });
     }
