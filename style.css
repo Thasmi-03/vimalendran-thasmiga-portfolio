@@ -374,6 +374,16 @@ ul {
 }
 
 /* Specific Icon Colors on Hover */
+.competency-card:hover .fa-js {
+    color: #f7df1e;
+    filter: drop-shadow(0 0 8px #f7df1e);
+}
+
+.competency-card:hover .fa-react {
+    color: #61dafb;
+    filter: drop-shadow(0 0 8px #61dafb);
+}
+
 .competency-card:hover .fa-html5 {
     color: #e34c26;
     filter: drop-shadow(0 0 8px #e34c26);
@@ -400,6 +410,16 @@ ul {
     filter: drop-shadow(0 0 8px #47a248);
 }
 
+.competency-card:hover .fa-project-diagram {
+    color: #00f2ea;
+    filter: drop-shadow(0 0 8px #00f2ea);
+}
+
+.competency-card:hover .fa-table {
+    color: #336791;
+    filter: drop-shadow(0 0 8px #336791);
+}
+
 .competency-card:hover .fa-git-alt {
     color: #f05032;
     filter: drop-shadow(0 0 8px #f05032);
@@ -413,6 +433,16 @@ ul {
 .competency-card:hover .fa-paper-plane {
     color: #ff6c37;
     filter: drop-shadow(0 0 8px #ff6c37);
+}
+
+.competency-card:hover .fa-desktop {
+    color: #007acc;
+    filter: drop-shadow(0 0 8px #007acc);
+}
+
+.competency-card:hover .fa-cloud-upload-alt {
+    color: #000;
+    filter: drop-shadow(0 0 8px #fff);
 }
 
 @keyframes fadeInUp {
@@ -584,7 +614,50 @@ ul {
     color: var(--text-muted);
 }
 
-/* Contact Section */
+/* Contact Info Copyable */
+.info-item.copyable {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.info-item.copyable:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.copy-icon {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: color 0.3s;
+}
+
+.info-item.copyable:hover .copy-icon {
+    color: var(--primary-color);
+}
+
+.copy-feedback {
+    position: absolute;
+    top: -30px;
+    right: 20px;
+    background: var(--primary-color);
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.copy-feedback.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1.5fr;

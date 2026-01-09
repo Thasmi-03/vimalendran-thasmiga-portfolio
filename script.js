@@ -37,23 +37,90 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form submission handler
+    // Initialize EmailJS (Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key)
+    (function () {
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        }
+    })();
+
+    // Copy to Clipboard Logic
+    const copyableItems = document.querySelectorAll('.info-item.copyable');
+    copyableItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const textToCopy = item.getAttribute('data-copy');
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Create feedback element if not exists
+                    let feedback = item.querySelector('.copy-feedback');
+                    if (!feedback) {
+                        feedback = document.createElement('span');
+                        feedback.className = 'copy-feedback';
+                        feedback.textContent = 'Copied!';
+                        item.appendChild(feedback);
+                    }
+
+                    // Show feedback
+                    feedback.classList.add('show');
+                    setTimeout(() => {
+                        feedback.classList.remove('show');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            }
+        });
+    });
+
+    // Form submission handler with EmailJS
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
 
-            const subject = `Contact from Portfolio: ${name}`;
-            const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
 
-            // Open email client
-            window.location.href = `mailto:vimalthasmiga1112@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const formData = {
+                from_name: document.getElementById('name').value,
+                reply_to: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
 
-            contactForm.reset();
+            // If EmailJS is initialized, use it. Otherwise, fallback to mailto (but notify)
+            if (typeof emailjs !== 'undefined') {
+                // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual EmailJS IDs
+                emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
+                    .then(() => {
+                        alert('Message sent successfully! I will get back to you soon.');
+                        contactForm.reset();
+                    })
+                    .catch((error) => {
+                        console.error('EmailJS Error:', error);
+                        alert('Failed to send message via EmailJS. Falling back to email client.');
+
+                        // Fallback to mailto
+                        const subject = `Contact from Portfolio: ${formData.from_name}`;
+                        const body = `Name: ${formData.from_name}\nEmail: ${formData.reply_to}\n\nMessage:\n${formData.message}`;
+                        window.location.href = `mailto:vimalthasmiga1112@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    })
+                    .finally(() => {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    });
+            } else {
+                // Fallback to mailto if SDK failed to load
+                const subject = `Contact from Portfolio: ${formData.from_name}`;
+                const body = `Name: ${formData.from_name}\nEmail: ${formData.reply_to}\n\nMessage:\n${formData.message}`;
+                window.location.href = `mailto:vimalthasmiga1112@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+                contactForm.reset();
+            }
         });
     }
 
