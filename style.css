@@ -445,6 +445,27 @@ ul {
     filter: drop-shadow(0 0 8px #fff);
 }
 
+/* Soft Skills Icon Colors */
+.competency-card:hover .fa-user-clock {
+    color: #ff9f43;
+    filter: drop-shadow(0 0 8px #ff9f43);
+}
+
+.competency-card:hover .fa-crown {
+    color: #f1c40f;
+    filter: drop-shadow(0 0 8px #f1c40f);
+}
+
+.competency-card:hover .fa-lightbulb {
+    color: #feca57;
+    filter: drop-shadow(0 0 8px #feca57);
+}
+
+.competency-card:hover .fa-users {
+    color: #48dbfb;
+    filter: drop-shadow(0 0 8px #48dbfb);
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -628,13 +649,19 @@ ul {
 
 .copy-icon {
     margin-left: 10px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    transition: color 0.3s;
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.info-item.copyable:hover .copy-icon {
-    color: var(--primary-color);
+.copy-icon i {
+    font-size: 0.9rem !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin: 0 !important;
+    transition: all 0.3s ease;
+}
+
+.info-item.copyable:hover .copy-icon i {
+    color: var(--primary-color) !important;
 }
 
 .copy-feedback {
