@@ -636,6 +636,84 @@ ul {
     color: var(--text-muted);
 }
 
+/* Certifications Section */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.certification-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+.certification-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 242, 234, 0.15);
+}
+
+.cert-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 242, 234, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cert-icon i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.cert-content {
+    flex: 1;
+}
+
+.cert-content h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+}
+
+.cert-issuer {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+}
+
+.cert-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cert-link:hover {
+    color: #fff;
+    gap: 0.7rem;
+}
+
+.cert-link i {
+    font-size: 0.75rem;
+}
+
 /* Contact Info Copyable */
 .info-item.copyable {
     cursor: pointer;
@@ -715,7 +793,8 @@ ul {
 
 .info-item i.fa-phone,
 .info-item i.fa-envelope,
-.info-item i.fa-share-nodes {
+.info-item i.fa-share-nodes,
+.info-item i.fa-certificate {
     font-size: 1rem;
     color: var(--primary-color);
     margin-top: 1px;
@@ -774,6 +853,22 @@ ul {
     width: 16px;
     text-align: center;
     flex-shrink: 0;
+}
+
+.social-link:hover .fa-medium {
+    color: #00ab6c;
+}
+
+.social-link:hover .fa-free-code-camp {
+    color: #0a0a23;
+}
+
+.social-link:hover .fa-linkedin {
+    color: #0077b5;
+}
+
+.social-link:hover .fa-github {
+    color: #fff;
 }
 
 /* Quick Contact Actions */
